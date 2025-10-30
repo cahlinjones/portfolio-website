@@ -689,10 +689,10 @@
         }
 
         .timeline-item {
-            display: grid;
-            grid-template-columns: 1fr 80px 1fr;
+            display: flex;
+            align-items: center;
             gap: 40px;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
             position: relative;
         }
 
@@ -700,7 +700,17 @@
             margin-bottom: 0;
         }
 
+        .timeline-item:nth-child(odd) {
+            justify-content: flex-start;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-end;
+        }
+
         .timeline-content {
+            flex: 0 0 500px;
+            max-width: 500px;
             padding: 32px;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -725,6 +735,7 @@
         }
 
         .timeline-number {
+            flex-shrink: 0;
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -738,6 +749,7 @@
             font-family: 'Playfair Display', serif;
             position: relative;
             z-index: 2;
+            box-shadow: 0 0 0 8px rgba(212, 165, 116, 0.2);
         }
 
         .timeline-item:not(:last-child) .timeline-number::after {
@@ -747,15 +759,23 @@
             left: 50%;
             transform: translateX(-50%);
             width: 2px;
-            height: 100px;
-            background: linear-gradient(to bottom, var(--secondary), transparent);
+            height: 80px;
+            background: linear-gradient(to bottom, var(--secondary), rgba(212, 165, 116, 0.3));
         }
 
-        .timeline-item:nth-child(even) .timeline-content:first-child {
-            order: 3;
+        .timeline-item:nth-child(odd) .timeline-number {
+            order: 1;
         }
 
-        .timeline-item:nth-child(even) .timeline-content:last-child {
+        .timeline-item:nth-child(odd) .timeline-content {
+            order: 2;
+        }
+
+        .timeline-item:nth-child(even) .timeline-number {
+            order: 2;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
             order: 1;
         }
 
@@ -1260,23 +1280,28 @@
             }
 
             .timeline-item {
-                grid-template-columns: 1fr;
-                gap: 24px;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 40px;
             }
 
-            .timeline-item .timeline-content:first-child,
-            .timeline-item:nth-child(even) .timeline-content:first-child {
+            .timeline-content {
+                flex: 1;
+                max-width: 100%;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-number,
+            .timeline-item:nth-child(even) .timeline-number {
+                order: 1;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
                 order: 2;
             }
 
-            .timeline-item .timeline-content:last-child,
-            .timeline-item:nth-child(even) .timeline-content:last-child {
-                order: 3;
-            }
-
-            .timeline-number {
-                order: 1;
-                margin: 0 auto;
+            .timeline-item:not(:last-child) .timeline-number::after {
+                height: 40px;
             }
         }
 
@@ -1356,7 +1381,9 @@
             <a href="#home" class="logo">CahlsWebDev</a>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#process" class="nav-link">Process</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Work</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -1487,8 +1514,8 @@
                             <p>Projects Completed</p>
                         </div>
                         <div class="stat">
-                            <h3>5+</h3>
-                            <p>Happy Clients</p>
+                            <h3>∞+</h3>
+                            <p>Potential Clients</p>
                         </div>
                         <div class="stat">
                             <h3>2+</h3>
@@ -1512,15 +1539,13 @@
             </div>
             <div class="process-timeline">
                 <div class="timeline-item">
+                    <div class="timeline-number">1</div>
                     <div class="timeline-content">
                         <h3>Discovery & Planning</h3>
                         <p>Understanding your goals, target audience, and project requirements to create a solid foundation for success.</p>
                     </div>
-                    <div class="timeline-number">1</div>
-                    <div class="timeline-content"></div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-content"></div>
                     <div class="timeline-number">2</div>
                     <div class="timeline-content">
                         <h3>Design & Prototyping</h3>
@@ -1528,15 +1553,13 @@
                     </div>
                 </div>
                 <div class="timeline-item">
+                    <div class="timeline-number">3</div>
                     <div class="timeline-content">
                         <h3>Development</h3>
                         <p>Building your website with clean, efficient code and modern technologies to ensure optimal performance.</p>
                     </div>
-                    <div class="timeline-number">3</div>
-                    <div class="timeline-content"></div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-content"></div>
                     <div class="timeline-number">4</div>
                     <div class="timeline-content">
                         <h3>Testing & Launch</h3>
@@ -1721,14 +1744,14 @@
                 <span class="section-label">Testimonials</span>
                 <h2 class="section-title">What Clients Say</h2>
                 <p class="section-description">
-                    Don't just take my word for it - here's what clients have to say about working with me.
+                    These could be your reviews sponsoring your own personal brand. Partner up with me before review spots fill up!
                 </p>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="quote-icon">"</div>
                     <p class="testimonial-text">
-                        Cahlin delivered an outstanding website that exceeded our expectations. His attention to detail and commitment to quality is remarkable.
+                        Your brand.
                     </p>
                     <div class="testimonial-author">
                         <div class="author-image">SM</div>
@@ -1741,7 +1764,7 @@
                 <div class="testimonial-card">
                     <div class="quote-icon">"</div>
                     <p class="testimonial-text">
-                        Working with Cahlin was a breeze. He understood our vision and brought it to life with a beautiful, functional website.
+                        Your website.
                     </p>
                     <div class="testimonial-author">
                         <div class="author-image">JD</div>
@@ -1754,7 +1777,7 @@
                 <div class="testimonial-card">
                     <div class="quote-icon">"</div>
                     <p class="testimonial-text">
-                        Professional, responsive, and talented. Cahlin transformed our online presence and helped grow our business significantly.
+                        Your way.
                     </p>
                     <div class="testimonial-author">
                         <div class="author-image">ER</div>
@@ -1860,7 +1883,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2024 Cahlin Jones. All rights reserved.</p>
+                <p>&copy; 2025 Cahlin Jones. All rights reserved.</p>
                 <div class="social-links">
                     <a href="https://github.com/cahlinjones" target="_blank" aria-label="GitHub">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
